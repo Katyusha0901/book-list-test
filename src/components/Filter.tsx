@@ -1,1 +1,3 @@
-export function Filter() {}
+export function Filter() {
+  return <div></div>;
+}

@@ -1,12 +1,19 @@
 import React from "react";
 import "./App.css";
+import { Book, Tab } from "./types";
 import { Books } from "./components/Books";
 import { Filter } from "./components/Filter";
 import { Header } from "./components/Header";
-import { Book } from "./components/Book";
+import { BookPage } from "./components/BookPage";
 
-function App() {
-  return <div className="App"></div>;
+interface State {}
+
+export function App() {
+  return (
+    <div className="app">
+      <Header />
+      <Filter />
+      <Books />
+    </div>
+  );
 }
-
-export default App;
