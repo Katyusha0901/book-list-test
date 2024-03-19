@@ -3,16 +3,34 @@ import { Tab } from "../types";
 
 interface Props {
   currentTab: Tab;
-  //   changeTab: (tab: Tab) => void;
+  changeTab: (tab: Tab) => void;
   //   toRead: number;
   //   inProgress: number;
   //   done: number;
 }
 
-export const Header: React.FC<Props> = ({ currentTab }) => {
+export const Header: React.FC<Props> = ({ currentTab, changeTab }) => {
+  const toReadClassName =
+    "navbar__item" + (currentTab === "toread" ? "navbar__item_activ" : "");
+  const inProgressClassName =
+    "navbar__item" + (currentTab === "inprogress" ? "navbar__item_activ" : "");
+  const doneClassName =
+    "navbar__item" + (currentTab === "done" ? "navbar__item_activ" : "");
+
   return (
     <nav className="navbar">
-      <div></div>
+      <div className={toReadClassName} onClick={() => changeTab("toread")}>
+        To read <span className="navbar__count"></span>
+      </div>
+      <div
+        className={inProgressClassName}
+        onClick={() => changeTab("inprogress")}
+      >
+        In progress <span className="navbar__count"></span>
+      </div>
+      <div className={doneClassName} onClick={() => changeTab("done")}>
+        Done <span className="navbar__count"></span>
+      </div>
     </nav>
   );
 };
