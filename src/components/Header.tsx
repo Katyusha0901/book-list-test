@@ -3,10 +3,10 @@ import { Tab } from "../types";
 
 interface Props {
   currentTab: Tab;
-  changeTab: (tab: Tab) => void;
-  toRead: number;
-  inProgress: number;
-  done: number;
+  //   changeTab: (tab: Tab) => void;
+  //   toRead: number;
+  //   inProgress: number;
+  //   done: number;
 }
 
 export const Header: React.FC<Props> = ({ currentTab }) => {

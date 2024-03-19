@@ -14,13 +14,21 @@ interface State {
   tags: Set<string>;
 }
 
-class App extends React.Component<{}, State> {
+export class App extends React.Component<{}, State> {
   state: State = {
     allBooks: [],
     booksInProgressIds: new Set(),
     booksDoneIds: new Set(),
     currentTab: "toread" as Tab,
     tags: new Set(),
+  };
+
+  changeTab = (tab: Tab) => {
+    this.setState({ currentTab: tab });
+
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set("tab", tab);
+    window.history.pushState("", "", newUrl.toString());
   };
 
   render() {
