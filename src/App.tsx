@@ -23,6 +23,18 @@ export class App extends React.Component<{}, State> {
     tags: new Set(),
   };
 
+  componentDidMount() {
+    const newUrl = new URL(window.location.href);
+    newUrl.search = "";
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const tab = urlParams.get("tab");
+    if (tab === "toread" || tab === "inprogress" || tab === "done") {
+      newUrl.searchParams.set("tab", tab);
+      this.setState({ currentTab: tab });
+    }
+  }
+
   changeTab = (tab: Tab) => {
     this.setState({ currentTab: tab });
 
@@ -35,7 +47,7 @@ export class App extends React.Component<{}, State> {
     const { currentTab } = this.state;
     return (
       <div className="app">
-        <Header currentTab={currentTab} />
+        <Header currentTab={currentTab} changeTab={this.changeTab} />
         <Filter />
         <Books />
       </div>
