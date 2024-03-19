@@ -6,6 +6,8 @@ interface IProps {
   clearTags: () => void;
 }
 
-export function Filter() {
+export const Filter: React.FC<IProps> = ({ tags, removeTag, clearTags }) => {
+  if (!tags.size) return null;
+
   return <div></div>;
-}
+};
