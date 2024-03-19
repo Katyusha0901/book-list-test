@@ -5,12 +5,12 @@ import "./Header.css";
 interface Props {
   currentTab: Tab;
   changeTab: (tab: Tab) => void;
-  //   toRead: number;
+  toRead: number;
   //   inProgress: number;
   //   done: number;
 }
 
-export const Header: React.FC<Props> = ({ currentTab, changeTab }) => {
+export const Header: React.FC<Props> = ({ currentTab, changeTab, toRead }) => {
   const toReadClassName =
     "navbar__item" + (currentTab === "toread" ? " navbar__item_active" : "");
   const inProgressClassName =
@@ -22,7 +22,7 @@ export const Header: React.FC<Props> = ({ currentTab, changeTab }) => {
   return (
     <nav className="navbar">
       <div className={toReadClassName} onClick={() => changeTab("toread")}>
-        To read <span className="navbar__count"></span>
+        To read <span className="navbar__count">({toRead})</span>
       </div>
       <div
         className={inProgressClassName}

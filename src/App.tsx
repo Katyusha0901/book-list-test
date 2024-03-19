@@ -62,11 +62,70 @@ export class App extends React.Component<{}, State> {
     window.history.pushState("", "", newUrl.toString());
   };
 
+  startBook = (index: number, id: string) => {
+    const allBooks = this.state.allBooks;
+    allBooks[index].moved = true;
+    const movedBooks = allBooks.filter((book) => book.moved);
+    const movedBooksIds = movedBooks.map((book) => book.id);
+    localStorage.setItem("movedBooks", JSON.stringify(movedBooksIds));
+
+    const booksInProgressIds = this.state.booksInProgressIds;
+    booksInProgressIds.add(id);
+    localStorage.setItem(
+      "booksInProgress",
+      JSON.stringify(Array.from(booksInProgressIds))
+    );
+
+    this.setState({ allBooks, booksInProgressIds });
+  };
+
+  finishBook = (index: number, id: string) => {
+    const booksInProgressIds = this.state.booksInProgressIds;
+    booksInProgressIds.delete(id);
+    localStorage.setItem(
+      "booksInProgress",
+      JSON.stringify(Array.from(booksInProgressIds))
+    );
+
+    const booksDoneIds = this.state.booksDoneIds;
+    booksDoneIds.add(id);
+    localStorage.setItem("booksDone", JSON.stringify(Array.from(booksDoneIds)));
+
+    this.setState({ booksInProgressIds, booksDoneIds });
+  };
+
+  resetBook = (index: number, id: string) => {
+    const booksDoneIds = this.state.booksDoneIds;
+    booksDoneIds.delete(id);
+    localStorage.setItem("booksDone", JSON.stringify(Array.from(booksDoneIds)));
+
+    const allBooks = this.state.allBooks;
+    allBooks[index].moved = false;
+    const movedBooks = allBooks.filter((book) => book.moved);
+    const movedBooksIds = movedBooks.map((book) => book.id);
+    localStorage.setItem("movedBooks", JSON.stringify(movedBooksIds));
+
+    this.setState({ booksDoneIds, allBooks });
+  };
+
   render() {
-    const { currentTab } = this.state;
+    const { currentTab, allBooks } = this.state;
+    const toReadCount = allBooks.filter((book) => !book.moved).length;
+
+    let moveBook = this.startBook;
+    if (currentTab === "inprogress") {
+      moveBook = this.finishBook;
+    }
+    if (currentTab === "done") {
+      moveBook = this.resetBook;
+    }
     return (
       <div className="app">
-        <Header currentTab={currentTab} changeTab={this.changeTab} />
+        <Header
+          currentTab={currentTab}
+          changeTab={this.changeTab}
+          toRead={toReadCount}
+        />
         <Filter />
         <Books />
       </div>
