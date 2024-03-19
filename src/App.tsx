@@ -14,8 +14,8 @@ interface State {
   tags: Set<string>;
 }
 
-export function App() {
-  const state: State = {
+class App extends React.Component<{}, State> {
+  state: State = {
     allBooks: [],
     booksInProgressIds: new Set(),
     booksDoneIds: new Set(),
@@ -23,11 +23,14 @@ export function App() {
     tags: new Set(),
   };
 
-  return (
-    <div className="app">
-      <Header />
-      <Filter />
-      <Books />
-    </div>
-  );
+  render() {
+    const { currentTab } = this.state;
+    return (
+      <div className="app">
+        <Header currentTab={currentTab} />
+        <Filter />
+        <Books />
+      </div>
+    );
+  }
 }
