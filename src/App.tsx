@@ -52,6 +52,22 @@ export class App extends React.Component<{}, State> {
       newUrl.searchParams.set("tab", tab);
       this.setState({ currentTab: tab });
     }
+
+    if (!localStorage.getItem("booksInProgress")) {
+      localStorage.setItem("booksInProgress", "[]");
+    }
+    const storedBooksInProgress: string[] = JSON.parse(
+      localStorage.getItem("booksInProgress") as string
+    );
+    this.setState({ booksInProgressIds: new Set(storedBooksInProgress) });
+
+    if (!localStorage.getItem("booksDone")) {
+      localStorage.setItem("booksDone", "[]");
+    }
+    const storedBooksDone: string[] = JSON.parse(
+      localStorage.getItem("booksDone") as string
+    );
+    this.setState({ booksDoneIds: new Set(storedBooksDone) });
   }
 
   changeTab = (tab: Tab) => {
@@ -109,8 +125,11 @@ export class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { currentTab, allBooks } = this.state;
+    const { currentTab, allBooks, booksInProgressIds, booksDoneIds } =
+      this.state;
     const toReadCount = allBooks.filter((book) => !book.moved).length;
+    const inProgressCount = booksInProgressIds.size;
+    const doneCount = booksDoneIds.size;
 
     let moveBook = this.startBook;
     if (currentTab === "inprogress") {
@@ -125,6 +144,8 @@ export class App extends React.Component<{}, State> {
           currentTab={currentTab}
           changeTab={this.changeTab}
           toRead={toReadCount}
+          inProgress={inProgressCount}
+          done={doneCount}
         />
         <Filter />
         <Books />

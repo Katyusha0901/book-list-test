@@ -6,11 +6,17 @@ interface Props {
   currentTab: Tab;
   changeTab: (tab: Tab) => void;
   toRead: number;
-  //   inProgress: number;
-  //   done: number;
+  inProgress: number;
+  done: number;
 }
 
-export const Header: React.FC<Props> = ({ currentTab, changeTab, toRead }) => {
+export const Header: React.FC<Props> = ({
+  currentTab,
+  changeTab,
+  toRead,
+  inProgress,
+  done,
+}) => {
   const toReadClassName =
     "navbar__item" + (currentTab === "toread" ? " navbar__item_active" : "");
   const inProgressClassName =
@@ -28,10 +34,10 @@ export const Header: React.FC<Props> = ({ currentTab, changeTab, toRead }) => {
         className={inProgressClassName}
         onClick={() => changeTab("inprogress")}
       >
-        In progress <span className="navbar__count"></span>
+        In progress <span className="navbar__count">({inProgress})</span>
       </div>
       <div className={doneClassName} onClick={() => changeTab("done")}>
-        Done <span className="navbar__count"></span>
+        Done <span className="navbar__count">({done})</span>
       </div>
     </nav>
   );
