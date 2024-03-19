@@ -1,5 +1,6 @@
 import React from "react";
 import { Tab } from "../types";
+import "./Header.css";
 
 interface Props {
   currentTab: Tab;
@@ -11,11 +12,12 @@ interface Props {
 
 export const Header: React.FC<Props> = ({ currentTab, changeTab }) => {
   const toReadClassName =
-    "navbar__item" + (currentTab === "toread" ? "navbar__item_activ" : "");
+    "navbar__item" + (currentTab === "toread" ? " navbar__item_active" : "");
   const inProgressClassName =
-    "navbar__item" + (currentTab === "inprogress" ? "navbar__item_activ" : "");
+    "navbar__item" +
+    (currentTab === "inprogress" ? " navbar__item_active" : "");
   const doneClassName =
-    "navbar__item" + (currentTab === "done" ? "navbar__item_activ" : "");
+    "navbar__item" + (currentTab === "done" ? " navbar__item_active" : "");
 
   return (
     <nav className="navbar">

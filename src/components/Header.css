@@ -1,0 +1,28 @@
+.navbar {
+  display: flex;
+
+  justify-content: space-evenly;
+}
+
+.navbar__item {
+  padding: 10px;
+
+  cursor: pointer;
+  text-align: center;
+
+  border-right: 1px solid #999;
+  border-bottom: 1px solid #999;
+
+  flex-grow: 100;
+}
+
+.navbar__item:last-child {
+  border-right: none;
+}
+
+.navbar__item_active {
+  font-weight: bold;
+  pointer-events: none;
+
+  border-bottom: none;
+}
