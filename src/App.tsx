@@ -24,6 +24,25 @@ export class App extends React.Component<{}, State> {
   };
 
   componentDidMount() {
+    fetch("../public/data/10-items.json")
+      .then((response) => response.json())
+      .then((data) => {
+        data.items.forEach((book: Book, index: number) => (book.index = index));
+        const allBooks: Book[] = data.items;
+        if (!localStorage.getItem("moveBooks")) {
+          localStorage.setItem("moveBooks", "[]");
+        }
+        const movedBookIds: string[] = JSON.parse(
+          localStorage.getItem("moveBooks") as string
+        );
+        for (let movedId of movedBookIds) {
+          const book = allBooks.find((book) => book.id === movedId);
+          if (book) book.moved = true;
+        }
+
+        this.setState({ allBooks });
+      });
+
     const newUrl = new URL(window.location.href);
     newUrl.search = "";
     const urlParams = new URLSearchParams(window.location.search);
