@@ -138,6 +138,7 @@ export class App extends React.Component<{}, State> {
     if (currentTab === "done") {
       moveBook = this.resetBook;
     }
+
     return (
       <div className="app">
         <Header
