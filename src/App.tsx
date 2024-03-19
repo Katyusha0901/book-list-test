@@ -53,6 +53,14 @@ export class App extends React.Component<{}, State> {
       this.setState({ currentTab: tab });
     }
 
+    const tags = urlParams.get("tags");
+    if (tags) {
+      newUrl.searchParams.set("tags", tags);
+      this.setState({ tags: new Set(tags.split(",")) });
+    }
+
+    window.history.pushState("", "", newUrl.toString());
+
     if (!localStorage.getItem("booksInProgress")) {
       localStorage.setItem("booksInProgress", "[]");
     }
@@ -75,6 +83,34 @@ export class App extends React.Component<{}, State> {
 
     const newUrl = new URL(window.location.href);
     newUrl.searchParams.set("tab", tab);
+    window.history.pushState("", "", newUrl.toString());
+  };
+
+  addTag = (tag: string) => {
+    let tags = this.state.tags;
+    tags.add(tag);
+    this.setState({ tags });
+
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set("tags", Array.from(tags).join(","));
+    window.history.pushState("", "", newUrl.toString());
+  };
+
+  removeTag = (tag: string) => {
+    let tags = this.state.tags;
+    tags.delete(tag);
+    this.setState({ tags });
+
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set("tags", Array.from(tags).join(","));
+    window.history.pushState("", "", newUrl.toString());
+  };
+
+  clearTags = () => {
+    this.setState({ tags: new Set() });
+
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.delete("tags");
     window.history.pushState("", "", newUrl.toString());
   };
 
@@ -125,7 +161,7 @@ export class App extends React.Component<{}, State> {
   };
 
   render() {
-    const { currentTab, allBooks, booksInProgressIds, booksDoneIds } =
+    const { currentTab, allBooks, booksInProgressIds, booksDoneIds, tags } =
       this.state;
     const toReadCount = allBooks.filter((book) => !book.moved).length;
     const inProgressCount = booksInProgressIds.size;
@@ -148,7 +184,11 @@ export class App extends React.Component<{}, State> {
           inProgress={inProgressCount}
           done={doneCount}
         />
-        <Filter />
+        <Filter
+          tags={tags}
+          removeTag={this.removeTag}
+          clearTags={this.clearTags}
+        />
         <Books />
       </div>
     );
