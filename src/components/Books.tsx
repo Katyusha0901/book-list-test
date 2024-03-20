@@ -2,7 +2,8 @@ import React from "react";
 import { Book, Tab } from "../types";
 import { BookPage } from "./BookPage";
 import "./Books.css";
-
+import List from "rc-virtual-list";
+import { useState } from "react";
 interface Props {
   tab: Tab;
   books: Book[];
@@ -62,18 +63,21 @@ export class Books extends React.Component<Props, State> {
     const filteredBooks = this.filterBooks();
     this.filteredBooksCount = filteredBooks.length;
 
-    const booksJSX = filteredBooks
-      .slice(0, this.state.countToDisplay)
-      .map((book) => (
-        <BookPage
-          tab={tab}
-          book={book}
-          moveBook={moveBook}
-          addTag={addTag}
-          key={book.id}
-        />
-      ));
-    if (!booksJSX.length) {
+    const booksJSX = (
+      <List data={filteredBooks} height={600} itemHeight={100} itemKey="id">
+        {(book) => (
+          <BookPage
+            tab={tab}
+            book={book}
+            moveBook={moveBook}
+            addTag={addTag}
+            key={book.id}
+          />
+        )}
+      </List>
+    );
+
+    if (!filteredBooks.length) {
       return (
         <div className="books">
           {books.length ? "List is empty" : "Loading..."}

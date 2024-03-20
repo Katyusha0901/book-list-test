@@ -44,5 +44,13 @@
 
   cursor: pointer;
 
-  background-color: #ddd;
+  background-color: #ced5ff;
+}
+
+.book-page__move-button {
+  background-color: #ced5ff;
+}
+
+.book-page__move-button-text {
+  background-color: #ced5ff;
 }

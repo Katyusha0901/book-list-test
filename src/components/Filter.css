@@ -5,3 +5,7 @@
   align-items: center;
   gap: 10px;
 }
+
+.filter__clear {
+  background-color: #ced5ff;
+}

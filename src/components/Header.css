@@ -21,7 +21,6 @@
 }
 
 .navbar__item_active {
-  font-weight: bold;
   pointer-events: none;
 
   border-bottom: none;

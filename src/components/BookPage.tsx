@@ -19,7 +19,11 @@ export const BookPage: React.FC<Props> = ({ tab, book, addTag, moveBook }) => (
     <p className="book__description">{book.description}</p>
 
     {book.tags.map((tag, tagIndex) => (
-      <span className="book__tag" key={tagIndex} onClick={() => addTag(tag)}>
+      <span
+        className="book-page__tag"
+        key={tagIndex}
+        onClick={() => addTag(tag)}
+      >
         #{tag}
       </span>
     ))}
@@ -29,16 +33,16 @@ export const BookPage: React.FC<Props> = ({ tab, book, addTag, moveBook }) => (
 function createMoveBookButton(tab: Tab, callback: () => void): JSX.Element {
   if (tab === "toread") {
     return (
-      <button className="book__move-button" onClick={callback}>
-        <span className="book__move-button-text">start reading</span> →
+      <button className="book-page__move-button" onClick={callback}>
+        <span className="book-page__move-button-text">start reading</span> →
       </button>
     );
   }
 
   if (tab === "inprogress") {
     return (
-      <button className="book__move-button" onClick={callback}>
-        <span className="book__move-button-text">done</span> →
+      <button className="book-page__move-button" onClick={callback}>
+        <span className="book-page__move-button-text">done</span> →
       </button>
     );
   }
