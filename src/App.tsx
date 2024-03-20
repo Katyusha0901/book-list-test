@@ -23,10 +23,11 @@ export class App extends React.Component<{}, State> {
   };
 
   componentDidMount() {
-    fetch("./30000-items (1).json")
+    fetch("book-list-test/data/30000-items.json")
       .then((response) => response.json())
       .then((data) => {
         data.items.forEach((book: Book, index: number) => (book.index = index));
+
         const allBooks: Book[] = data.items;
         if (!localStorage.getItem("moveBooks")) {
           localStorage.setItem("moveBooks", "[]");
@@ -40,7 +41,8 @@ export class App extends React.Component<{}, State> {
         }
 
         this.setState({ allBooks });
-      });
+      })
+      .catch((err) => console.log("Ошибка", err));
 
     const newUrl = new URL(window.location.href);
     newUrl.search = "";
@@ -85,6 +87,8 @@ export class App extends React.Component<{}, State> {
     window.history.pushState("", "", newUrl.toString());
   };
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   addTag = (tag: string) => {
     let tags = this.state.tags;
     tags.add(tag);
@@ -112,6 +116,8 @@ export class App extends React.Component<{}, State> {
     newUrl.searchParams.delete("tags");
     window.history.pushState("", "", newUrl.toString());
   };
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   startBook = (index: number, id: string) => {
     const allBooks = this.state.allBooks;
@@ -158,6 +164,8 @@ export class App extends React.Component<{}, State> {
 
     this.setState({ booksDoneIds, allBooks });
   };
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   render() {
     const { currentTab, allBooks, booksInProgressIds, booksDoneIds, tags } =

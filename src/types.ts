@@ -5,7 +5,7 @@ export interface Book {
   title: string;
   description: string;
   tags: string[];
-  moved?: boolean; // true equals book in progress or done
+  moved?: boolean;
 }
 
 export type Tab = "toread" | "done" | "inprogress";
