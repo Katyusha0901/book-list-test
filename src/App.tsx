@@ -4,7 +4,6 @@ import { Book, Tab } from "./types";
 import { Books } from "./components/Books";
 import { Filter } from "./components/Filter";
 import { Header } from "./components/Header";
-import { BookPage } from "./components/BookPage";
 
 interface State {
   allBooks: Book[];
@@ -24,7 +23,7 @@ export class App extends React.Component<{}, State> {
   };
 
   componentDidMount() {
-    fetch("../public/data/10-items.json")
+    fetch("./30000-items (1).json")
       .then((response) => response.json())
       .then((data) => {
         data.items.forEach((book: Book, index: number) => (book.index = index));
