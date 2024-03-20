@@ -54,5 +54,29 @@ export class Books extends React.Component<Props, State> {
     );
   };
 
-  
+  render() {
+    const { tab, addTag, moveBook, books } = this.props;
+    const filteredBooks = this.filterBooks();
+    this.filteredBooksCount = filteredBooks.length;
+
+    const booksJSX = filteredBooks
+      .slice(0, this.state.countToDisplay)
+      .map((book) => (
+        <Book
+          tab={tab}
+          book={book}
+          moveBook={moveBook}
+          addTag={addTag}
+          key={book.id}
+        />
+      ));
+    if (!booksJSX.length) {
+      return (
+        <div className="books">
+          {books.length ? "List is empty" : "Loading..."}
+        </div>
+      );
+    }
+    return <div ref={this.booksRef}>{booksJSX}</div>;
+  }
 }
