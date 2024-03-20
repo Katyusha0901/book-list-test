@@ -1,11 +1,12 @@
 import React from "react";
 import { Book, Tab } from "../types";
+import { BookPage } from "./BookPage";
 
 interface Props {
   tab: Tab;
   books: Book[];
   tags: Set<string>;
-  addTags: (tag: string) => void;
+  addTag: (tag: string) => void;
   moveBook: (index: number, id: string) => void;
   booksInProgressIds: Set<string>;
   booksDoneIds: Set<string>;
@@ -63,7 +64,7 @@ export class Books extends React.Component<Props, State> {
     const booksJSX = filteredBooks
       .slice(0, this.state.countToDisplay)
       .map((book) => (
-        <Book
+        <BookPage
           tab={tab}
           book={book}
           moveBook={moveBook}
