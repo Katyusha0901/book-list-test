@@ -189,7 +189,14 @@ export class App extends React.Component<{}, State> {
           removeTag={this.removeTag}
           clearTags={this.clearTags}
         />
-        <Books />
+        <Books
+          tab={currentTab}
+          books={allBooks}
+          tags={tags}
+          moveBook={moveBook}
+          booksInProgressIds={booksInProgressIds}
+          booksDoneIds={booksDoneIds}
+        />
       </div>
     );
   }
