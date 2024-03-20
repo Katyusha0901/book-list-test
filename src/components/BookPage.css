@@ -1,0 +1,48 @@
+.book-page {
+  padding: 15px;
+
+  border-bottom: 1px solid #999;
+}
+.book-page__author {
+  font-weight: normal;
+
+  margin: 0;
+}
+
+.book-page__title-and-button {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.book-page__title {
+  margin: 10px 0;
+}
+
+.book-page__move-button {
+  cursor: pointer;
+  text-align: right;
+
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.book-page__move-button-text {
+  font-weight: bold;
+
+  text-decoration: underline;
+}
+
+.book-page__description {
+  margin: 20px 0;
+}
+
+.book-page__tag {
+  margin-right: 10px;
+  padding: 3px 7px;
+
+  cursor: pointer;
+
+  background-color: #ddd;
+}

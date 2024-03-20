@@ -1,5 +1,6 @@
 import React from "react";
 import { Book, Tab } from "../types";
+import "./BookPage.css";
 
 interface Props {
   tab: Tab;
@@ -41,11 +42,10 @@ function createMoveBookButton(tab: Tab, callback: () => void): JSX.Element {
       </button>
     );
   }
-  if (tab === "done") {
-    return (
-      <button className="book__move-button" onClick={callback}>
-        <span className="book__move-button-text">to read</span> →
-      </button>
-    );
-  }
+
+  return (
+    <button className="book-page__move-button" onClick={callback}>
+      <span className="book-page__move-button-text">to read</span>→
+    </button>
+  );
 }

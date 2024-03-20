@@ -1,6 +1,7 @@
 import React from "react";
 import { Book, Tab } from "../types";
 import { BookPage } from "./BookPage";
+import "./Books.css";
 
 interface Props {
   tab: Tab;
