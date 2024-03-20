@@ -5,6 +5,7 @@ interface Props {
   tab: Tab;
   books: Book[];
   tags: Set<string>;
+  addTags: (tag: string) => void;
   moveBook: (index: number, id: string) => void;
   booksInProgressIds: Set<string>;
   booksDoneIds: Set<string>;

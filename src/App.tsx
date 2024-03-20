@@ -193,6 +193,7 @@ export class App extends React.Component<{}, State> {
           tab={currentTab}
           books={allBooks}
           tags={tags}
+          addTag={this.addTag}
           moveBook={moveBook}
           booksInProgressIds={booksInProgressIds}
           booksDoneIds={booksDoneIds}
