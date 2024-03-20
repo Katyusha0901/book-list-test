@@ -29,11 +29,11 @@ export class App extends React.Component<{}, State> {
         data.items.forEach((book: Book, index: number) => (book.index = index));
 
         const allBooks: Book[] = data.items;
-        if (!localStorage.getItem("moveBooks")) {
-          localStorage.setItem("moveBooks", "[]");
+        if (!localStorage.getItem("movedBooks")) {
+          localStorage.setItem("movedBooks", "[]");
         }
         const movedBookIds: string[] = JSON.parse(
-          localStorage.getItem("moveBooks") as string
+          localStorage.getItem("movedBooks") as string
         );
         for (let movedId of movedBookIds) {
           const book = allBooks.find((book) => book.id === movedId);
