@@ -23,7 +23,7 @@ export class App extends React.Component<{}, State> {
   };
 
   componentDidMount() {
-    fetch("book-list-test/data/30000-items.json")
+    fetch("./data/30000-items.json")
       .then((response) => response.json())
       .then((data) => {
         data.items.forEach((book: Book, index: number) => (book.index = index));
