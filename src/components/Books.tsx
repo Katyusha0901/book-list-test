@@ -3,7 +3,6 @@ import { Book, Tab } from "../types";
 import { BookPage } from "./BookPage";
 import "./Books.css";
 import List from "rc-virtual-list";
-import { useState } from "react";
 interface Props {
   tab: Tab;
   books: Book[];
